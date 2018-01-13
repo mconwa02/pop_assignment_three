@@ -1,8 +1,8 @@
-import unittest
+import pytest
 from sudoku import *
 import copy
 
-class TestSudoku2011(unittest.TestCase):
+class TestSudoku2018(pytest.TestCase):
 
     def testConvertToSets(self):
         ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
@@ -132,4 +132,4 @@ class TestSudoku2011(unittest.TestCase):
 ##        print_sudoku(solution)
         self.assertEqual(solution, solved)
 
-unittest.main()
+pytest.main()
