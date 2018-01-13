@@ -1,4 +1,3 @@
-import pytest
 from sudoku import *
 import copy
 
@@ -7,42 +6,41 @@ class TestSudoku2018(pytest.TestCase):
     def testConvertToSets(self):
         ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
         s = set(range(1, 10))
-        self.assertEqual([[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]], convertToSets(ary))
-        self.assertTrue(type(ary[0][0]) is int, "The original array has been changed.")
+        assert convertToSets(ary) == [[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]]
+        assert type(ary[0][0]) is int
 
     def testConvertToInts(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
-        self.assertEqual([[0, 3, 4], [1, 0, 2], [0, 2, 3]], convertToInts(sets))
-        self.assertTrue(type(sets[0][0]) is set, "The original array has been changed.")
+        assert convertToInts(sets) == [[0, 3, 4], [1, 0, 2], [0, 2, 3]]
+        assert type(sets[0][0]) is set
 
     def testGetRowLocations(self):
         lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
-        self.assertEqual(set(lst), set(getRowLocations(5)))
+        assert set(getRowLocations(5)) == set(lst)
 
     def testGetColumnLocations(self):
         lst = [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5)]
-        self.assertEqual(set(lst), set(getColumnLocations(5)))
+        assert set(getColumnLocations(5)) == set(lst)
 
     def testGetBoxLocations(self):
         lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
-        self.assertEqual(set(lst), set(getBoxLocations((3, 2))))
+        assert set(getBoxLocations((3, 2)) == set(lst)
 
     def testEliminate(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
         location = (1, 2) # contains {2}
         count = eliminate(sets, location, [(0, 0), (1, 0), (2, 2)])
-        self.assertEqual(2, count)
-        self.assertEqual([[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]],
-                         sets)
+        assert count == 2               
+        assert sets == [[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]]              
                           
     def testIsSolved(self):
         # Just check whether every cell has been reduced to one number
         array = [[{1}] * 9] * 9
-        self.assertTrue(all([len(array[r][c]) == 1 for r in range(0, 9)
-                                                   for c in range(0, 9)]))
+                assert all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
+	
+	def testNotIsSolved(self):
         array[3][5] = {1, 2}
-        self.assertFalse(all([len(array[r][c]) == 1 for r in range(0, 9)
-                                                    for c in range(0, 9)]))
+        assert not all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
         
     
     def testSolve(self):
@@ -120,9 +118,9 @@ class TestSudoku2018(pytest.TestCase):
                    [0, 0, 0,  2, 8, 0,  0, 0, 0],
                    [0, 0, 0,  6, 0, 0,  0, 0, 3]]
                    
-        self.tryToSolve(sudoku1, solved1)
-        self.tryToSolve(sudoku2, solved2)
-        self.tryToSolve(sudoku3, solved3)
+		assert tryToSolve(sudoku1) == solved1
+		assert tryToSolve(sudoku2) == solved2
+		assert tryToSolve(sudoku3) == solved3
 
     def tryToSolve(self, problem, solution):
 ##        print_sudoku(problem)
@@ -130,6 +128,6 @@ class TestSudoku2018(pytest.TestCase):
         solve(problemAsSets)
         solved = convertToInts(problemAsSets)
 ##        print_sudoku(solution)
-        self.assertEqual(solution, solved)
+        assert solved == solution
 
 pytest.main()
