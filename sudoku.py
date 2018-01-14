@@ -26,3 +26,10 @@ def convertToInts(problem):
             else:
                 problem[i][j] = 0
     return problem          
+
+def getRowLocations(rowNumber):
+    """Given a rowNumber, return a list of all nine "locations"
+            (row, column) tuples in that row. """
+    row = [rowNumber]*9
+    columns = list(range(0, 9))
+    return list(zip(row, columns))
