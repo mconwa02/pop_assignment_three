@@ -1,7 +1,7 @@
 from sudoku import *
 import copy
 
-class TestSudoku2018(pytest.TestCase):
+class TestSudoku2018(object):
 
     def testConvertToSets(self):
         ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
@@ -24,7 +24,12 @@ class TestSudoku2018(pytest.TestCase):
 
     def testGetBoxLocations(self):
         lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
-        assert set(getBoxLocations((3, 2)) == set(lst)
+        assert set(getBoxLocations((3, 2))) == set(lst)
+
+    def testListOfLocations(self):
+        location = (1, 2)
+        lst = [(1, 3), (2, 1), (6, 2), (1, 6), (7, 2), (1, 5), (2, 2), (1, 1), (3, 2), (0, 0), (8, 2), (1, 4), (4, 2), (1, 0), (0, 1), (2, 0), (1, 8), (1, 7), (5, 2), (0, 2)]
+        assert set(listOfLocations((1, 2))) == set(lst) 
 
     def testEliminate(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
@@ -36,9 +41,9 @@ class TestSudoku2018(pytest.TestCase):
     def testIsSolved(self):
         # Just check whether every cell has been reduced to one number
         array = [[{1}] * 9] * 9
-                assert all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
+        assert all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
 	
-	def testNotIsSolved(self):
+    def testNotIsSolved(self):
         array[3][5] = {1, 2}
         assert not all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
         
@@ -116,11 +121,11 @@ class TestSudoku2018(pytest.TestCase):
 
                    [0, 2, 0,  3, 0, 9,  0, 6, 4],
                    [0, 0, 0,  2, 8, 0,  0, 0, 0],
-                   [0, 0, 0,  6, 0, 0,  0, 0, 3]]
-                   
-		assert tryToSolve(sudoku1) == solved1
-		assert tryToSolve(sudoku2) == solved2
-		assert tryToSolve(sudoku3) == solved3
+                   [0, 0, 0,  6, 0, 0,  0, 0, 3]] 
+
+        assert tryToSolve(sudoku1, solved1)
+        assert tryToSolve(sudoku2, solved2)
+        assert tryToSolve(sudoku3, solved3)
 
     def tryToSolve(self, problem, solution):
 ##        print_sudoku(problem)
@@ -130,4 +135,3 @@ class TestSudoku2018(pytest.TestCase):
 ##        print_sudoku(solution)
         assert solved == solution
 
-pytest.main()
