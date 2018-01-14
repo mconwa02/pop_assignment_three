@@ -81,3 +81,21 @@ def getBoxLocations(location):
         s = [6]*3+[7]*3+[8]*3
         t = [6,7,8]*3
         return list(zip(s, t))
+
+def eliminate(problem, location, listOfLocations):
+    """The given location in the array problem should contain a set containing a single number.
+    For each location in the listOfLocations except location**, remove the number in location from the set in each other location.
+    This function changes the array problem and returns a count of the number of eliminations (removals) actually made. """
+    count = 0
+    x = location[0]
+    y = location[1]
+    value = list(problem[x][y])[0]
+    for u in range(len(listOfLocations)):
+        tp = listOfLocations[u]
+        s = tp[0]
+        t = tp[1]           
+        if value in problem[s][t]:
+            count += 1
+            problem[s][t].remove(value)      
+    return count 
+
