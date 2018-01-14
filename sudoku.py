@@ -21,7 +21,34 @@ def main():
                 if len(problem[i][j]) > 1:
                     location = (i, j)
                     print(location, problem[i][j])    
-
+    finished = False
+    while not finished:
+        print("Would you like to solve another puzzle?")
+        ans = input()
+        if ans[0]=='Y' or ans[0]=='y':
+            print("Please name file containing Sudoku puzzle:")
+            name = input()
+            problem = read_sudoku(name)
+            print("Puzzle that was selected to be solved")    
+            print_sudoku(problem)
+            convertToSets(problem)
+            solve(problem)
+            if isSolved(problem):
+                print("Puzzle solved!")
+            else:
+                print("Puzzle not solved!")
+            convertToInts(problem)    
+            print_sudoku(problem)
+            convertToSets(problem)
+            if not isSolved(problem):
+                solve(problem)
+                for i in range(len(problem)):
+                    for j in range(len(problem[i])):
+                        if len(problem[i][j]) > 1:
+                            location = (i, j)
+                            print(location, problem[i][j])
+        else:
+            finished = True
 
 def read_sudoku(file):
     """reads in files"""
