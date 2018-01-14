@@ -113,4 +113,13 @@ def isSolved(problem):
         ans = False
     if 'F' not in M:
         ans = True
-    return ans 
+    return ans
+
+def listOfLocations(location):
+    ListA = getRowLocations(location[0]) + getColumnLocations(location[1]) + getBoxLocations(location)
+    setA = set(ListA)
+    setA.remove(location)
+    ListB = list(setA)
+    return ListB
+
+
