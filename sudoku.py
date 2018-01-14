@@ -99,3 +99,18 @@ def eliminate(problem, location, listOfLocations):
             problem[s][t].remove(value)      
     return count 
 
+def isSolved(problem):
+    """ Given a 2D array problem of sets, return True if the Sudoku problem has been solved
+        every set contains exactly one element) and False otherwise. """
+    M = []
+    for i in range(len(problem)):
+        for j in range(len(problem[i])):
+            if len(problem[i][j]) == 1:
+                M.append('T') 
+            else:
+                M.append('F')
+    if 'F' in M:
+        ans = False
+    if 'F' not in M:
+        ans = True
+    return ans 
