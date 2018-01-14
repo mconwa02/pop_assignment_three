@@ -122,4 +122,16 @@ def listOfLocations(location):
     ListB = list(setA)
     return ListB
 
-
+def solve(problem):
+    """ Given a 2D array problem of sets, try to solve it.
+        This function changes the array problem and returns True
+        if the problem has been solved, False otherwise. """
+    check = 0
+    while check <= 81:
+        check += 1
+        for i in range(len(problem)):
+            for j in range(len(problem[i])):
+                if len(problem[i][j]) == 1:
+                    location =(i, j)
+                    eliminate(problem, location, listOfLocations(location))  
+    return isSolved(problem)
