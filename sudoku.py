@@ -33,3 +33,10 @@ def getRowLocations(rowNumber):
     row = [rowNumber]*9
     columns = list(range(0, 9))
     return list(zip(row, columns))
+            
+def getColumnLocations(columnNumber):
+    """ Given a columnNumber, return a list of all nine "locations"
+            (row, column) tuples in that column. """
+    rows = list(range(0, 9))
+    column = [columnNumber]*9
+    return list(zip(rows, column))    
