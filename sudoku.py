@@ -13,6 +13,14 @@ def main():
         print("Puzzle not solved!")
     convertToInts(problem)    
     print_sudoku(problem)
+    convertToSets(problem)
+    if not isSolved(problem):
+        solve(problem)
+        for i in range(len(problem)):
+            for j in range(len(problem[i])):
+                if len(problem[i][j]) > 1:
+                    location = (i, j)
+                    print(location, problem[i][j])    
 
 
 def read_sudoku(file):
