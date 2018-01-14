@@ -1,3 +1,20 @@
+def main():
+    """ Michelle Conway """
+    print("Please name file containing Sudoku puzzle:")
+    name = input()
+    problem = read_sudoku(name)
+    print("Puzzle that was selected to be solved")    
+    print_sudoku(problem)
+    convertToSets(problem)
+    solve(problem)
+    if isSolved(problem):
+        print("Puzzle solved!")
+    else:
+        print("Puzzle not solved!")
+    convertToInts(problem)    
+    print_sudoku(problem)
+
+
 def read_sudoku(file):
     """reads in files"""
     stream = open(file)
