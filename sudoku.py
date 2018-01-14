@@ -135,3 +135,32 @@ def solve(problem):
                     location =(i, j)
                     eliminate(problem, location, listOfLocations(location))  
     return isSolved(problem)
+
+def print_sudoku(problem):
+    """ Prints the Sudoku array (given as a list of lists of integers)
+        using dots to represent zeros """
+    x = '+'
+    y = '-'
+    z = '|'
+    a = ' .'
+    f = (x + y*6)*3 + x
+    L = []
+    for i in range(len(problem)):
+        for j in range(len(problem[i])):
+            if problem[i][j]==0:
+                L.append(' .') 
+            else:
+                L.append(' '+ str(problem[i][j]))
+    print(f)
+    print(z+str(L[0])+str(L[1])+str(L[2])+z+str(L[3])+str(L[4])+str(L[5])+z+str(L[6])+str(L[7])+str(L[8])+z)
+    print(z+str(L[9])+str(L[10])+str(L[11])+z+str(L[12])+str(L[13])+str(L[14])+z+str(L[15])+str(L[16])+str(L[17])+z)
+    print(z+str(L[18])+str(L[19])+str(L[20])+z+str(L[21])+str(L[22])+str(L[23])+z+str(L[24])+str(L[25])+str(L[26])+z)    
+    print(f)
+    print(z+str(L[27])+str(L[28])+str(L[29])+z+str(L[30])+str(L[31])+str(L[32])+z+str(L[33])+str(L[34])+str(L[35])+z)
+    print(z+str(L[36])+str(L[37])+str(L[38])+z+str(L[39])+str(L[40])+str(L[41])+z+str(L[42])+str(L[43])+str(L[44])+z)
+    print(z+str(L[45])+str(L[46])+str(L[47])+z+str(L[48])+str(L[49])+str(L[50])+z+str(L[51])+str(L[52])+str(L[53])+z)    
+    print(f)
+    print(z+str(L[54])+str(L[55])+str(L[56])+z+str(L[57])+str(L[58])+str(L[59])+z+str(L[60])+str(L[61])+str(L[62])+z)
+    print(z+str(L[63])+str(L[64])+str(L[65])+z+str(L[66])+str(L[67])+str(L[68])+z+str(L[69])+str(L[70])+str(L[71])+z)
+    print(z+str(L[72])+str(L[73])+str(L[74])+z+str(L[75])+str(L[76])+str(L[77])+z+str(L[78])+str(L[79])+str(L[80])+z)    
+    print(f)
