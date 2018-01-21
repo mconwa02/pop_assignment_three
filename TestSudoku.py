@@ -7,12 +7,12 @@ class TestSudoku2018(object):
         ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
         s = set(range(1, 10))
         assert convertToSets(ary) == [[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]]
-        assert type(ary[0][0]) is int
+        assert type(ary[0][0]) is set
 
     def testConvertToInts(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
         assert convertToInts(sets) == [[0, 3, 4], [1, 0, 2], [0, 2, 3]]
-        assert type(sets[0][0]) is set
+        assert type(sets[0][0]) is int
 
     def testGetRowLocations(self):
         lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
@@ -42,12 +42,10 @@ class TestSudoku2018(object):
         # Just check whether every cell has been reduced to one number
         array = [[{1}] * 9] * 9
         assert all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
-	
-    def testNotIsSolved(self):
         array[3][5] = {1, 2}
         assert not all([len(array[r][c]) == 1 for r in range(0, 9) for c in range(0, 9)])
-        
-    
+   
+  
     def testSolve(self):
         # Easy
         sudoku1 = [[4, 0, 0,  0, 0, 3,  0, 7, 0],
@@ -123,9 +121,9 @@ class TestSudoku2018(object):
                    [0, 0, 0,  2, 8, 0,  0, 0, 0],
                    [0, 0, 0,  6, 0, 0,  0, 0, 3]] 
 
-        assert tryToSolve(sudoku1, solved1)
-        assert tryToSolve(sudoku2, solved2)
-        assert tryToSolve(sudoku3, solved3)
+        self.tryToSolve(sudoku1, solved1)
+        self.tryToSolve(sudoku2, solved2)
+        self.tryToSolve(sudoku3, solved3)
 
     def tryToSolve(self, problem, solution):
 ##        print_sudoku(problem)
@@ -133,5 +131,7 @@ class TestSudoku2018(object):
         solve(problemAsSets)
         solved = convertToInts(problemAsSets)
 ##        print_sudoku(solution)
-        assert solved == solution
+        assert solved == solution   
 
+if __name__ == "__main__":
+	main()
